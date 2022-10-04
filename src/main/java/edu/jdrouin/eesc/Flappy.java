@@ -9,7 +9,11 @@ public class Flappy extends Canvas implements KeyListener {
 
     protected int largeurEcran = 600;
     protected int hauteurEcran = 600;
+
+    protected boolean pause = false;
     protected Oiseau oiseau;
+
+    protected Tuyau tuyau;
 
     public Flappy() throws InterruptedException {
         JFrame fenetre = new JFrame("Flappy");
@@ -37,16 +41,20 @@ public class Flappy extends Canvas implements KeyListener {
         demarrer();
     }
 
-
+    public void initialiser() {
+        oiseau = new Oiseau(hauteurEcran);
+        oiseau.setVitesseVertical(-1);
+        pause = false;
+        tuyau = new Tuyau(200,
+                hauteurEcran,
+                largeurEcran);
+    }
 
     public void demarrer() throws InterruptedException {
 
         long indexFrame = 0;
 
-        oiseau = new Oiseau(hauteurEcran);
-        oiseau.setVitesseVertical(-1);
-
-
+        initialiser();
 
         while(true) {
             indexFrame ++;
@@ -58,17 +66,26 @@ public class Flappy extends Canvas implements KeyListener {
             dessin.fillRect(0,0,largeurEcran,hauteurEcran);
 
             oiseau.dessiner(dessin);
+            tuyau.dessiner(dessin);
 
-            if(oiseau.getY() > hauteurEcran - oiseau.getLargeur()){
-                System.out.println("Perdu");
+            if (!pause) {
+                //------Si jamais l'oiseau est tombé par terre--------
+                if (oiseau.getY() > hauteurEcran - oiseau.getLargeur()) {
+                    System.out.println("Perdu");
+                    pause = true;
+                } else {
+                    //------Sinon si le jeu continue---------
+                    oiseau.deplacement();
+                }
+
             } else {
-                oiseau.deplacement();
+                dessin.setColor(new Color(0, 0, 0, 0.4f));
+                dessin.fillRect(0, 0, largeurEcran, hauteurEcran);
             }
-
-            //-----------------------------
-            dessin.dispose();
-            getBufferStrategy().show();
-            Thread.sleep(1000 / 60);
+                //-----------------------------
+                dessin.dispose();
+                getBufferStrategy().show();
+                Thread.sleep(1000 / 60);
         }
     }
 
@@ -88,8 +105,17 @@ public class Flappy extends Canvas implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if(e.getKeyCode() == 32){
-            System.out.println("JUMP !");
+        if(e.getKeyCode() == KeyEvent.VK_SPACE){
+            oiseau.setVitesseVertical(2.8f);
+        }
+
+        if(e.getKeyCode() == KeyEvent.VK_ENTER){
+            initialiser();
+        }
+
+        if(e.getKeyCode() == KeyEvent.VK_P){
+            //inverser un boolean
+            pause = !pause;
         }
 
     }

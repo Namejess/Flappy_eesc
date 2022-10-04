@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Oiseau extends Carre{
 
-    protected int vitesseVertical;
+    protected float vitesseVertical;
     protected final static int HAUTEUR_OISEAU = 40;
 
 
@@ -41,18 +41,24 @@ public class Oiseau extends Carre{
 
     public void deplacement(){
         y -= vitesseVertical;
-        vitesseVertical -= 0.5f;
+        vitesseVertical -= 0.05f;
+
+        if(y < 0){
+            vitesseVertical = Math.abs(vitesseVertical) *- 1;
+        }
     }
 
 
 //////////////////////////////////////
 //           GETTER SETTER          //
 //////////////////////////////////////
-    public int getVitesseVertical() {
+
+
+    public float getVitesseVertical() {
         return vitesseVertical;
     }
 
-    public void setVitesseVertical(int vitesseVertical) {
+    public void setVitesseVertical(float vitesseVertical) {
         this.vitesseVertical = vitesseVertical;
     }
 }

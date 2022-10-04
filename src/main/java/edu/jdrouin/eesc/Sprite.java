@@ -33,7 +33,7 @@ public abstract class Sprite {
 //////////////////////////////////////
 //           GETTER SETTER          //
 //////////////////////////////////////
-    public int getX(int i) {
+    public int getX() {
         return x;
     }
 
