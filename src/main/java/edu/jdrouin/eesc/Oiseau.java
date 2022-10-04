@@ -5,16 +5,21 @@ import java.awt.*;
 public class Oiseau extends Carre{
 
     protected int vitesseVertical;
+    protected final static int HAUTEUR_OISEAU = 40;
 
 
 //////////////////////////////////////
 //           CONSTRUCT              //
 //////////////////////////////////////
     public Oiseau(int x, int y) {
-    super(x, y, 40);
-    this.vitesseVertical = 0;
-}
+        super(x, y, HAUTEUR_OISEAU);
+        this.vitesseVertical = 0;
+    }
 
+    public Oiseau(int hauteurEcran) {
+        super(50, hauteurEcran / 2 - HAUTEUR_OISEAU / 2, HAUTEUR_OISEAU);
+        this.vitesseVertical = 0;
+    }
 
 //////////////////////////////////////
 //           METHODS                //
@@ -25,12 +30,22 @@ public class Oiseau extends Carre{
         dessin.fillRect(x, y, largeur, largeur);
     }
 
-     public void sauter() {
+    @Override
+    public int getCentreY() {
+        return super.getCentreY();
+    }
+
+    public void sauter() {
 
     }
 
+    public void deplacement(){
+        y -= vitesseVertical;
+        vitesseVertical -= 0.5f;
+    }
 
-    //////////////////////////////////////
+
+//////////////////////////////////////
 //           GETTER SETTER          //
 //////////////////////////////////////
     public int getVitesseVertical() {

@@ -25,9 +25,17 @@ public abstract class Carre extends Sprite {
 //           METHODS                //
 //////////////////////////////////////
 
+    @Override
+    public int getCentreX() {
+        return largeur / 2;
+    }
 
+    @Override
+    public int getCentreY() {
+        return largeur / 2;
+    }
 
-//////////////////////////////////////
+    //////////////////////////////////////
 //           GETTER SETTER          //
 //////////////////////////////////////
 
