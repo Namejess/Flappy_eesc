@@ -9,9 +9,18 @@ public abstract class Rectangle extends Carre {
 //////////////////////////////////////
 //           CONSTRUCT              //
 //////////////////////////////////////
-    public Rectangle(int x, int y, Color couleur) {
-        super(x, y, couleur);
+
+    public Rectangle(int x, int y, int largeur, int hauteur, Color couleur) {
+        super(x, y, largeur, couleur);
+        this.hauteur = hauteur;
     }
+
+    public Rectangle(int x, int y, int largeur, int hauteur) {
+        super(x, y, largeur, Color.GREEN);
+        this.hauteur = hauteur;
+    }
+
+
 
 //////////////////////////////////////
 //           METHODS                //

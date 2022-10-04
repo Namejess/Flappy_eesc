@@ -16,6 +16,12 @@ public abstract class Sprite {
         this.couleur = couleur;
     }
 
+    public Sprite(int x, int y) {
+        this.x = x;
+        this.y = y;
+        this.couleur = Color.RED;
+    }
+
 //////////////////////////////////////
 //           METHODS                //
 //////////////////////////////////////

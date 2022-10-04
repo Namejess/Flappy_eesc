@@ -10,28 +10,27 @@ public class Oiseau extends Carre{
 //////////////////////////////////////
 //           CONSTRUCT              //
 //////////////////////////////////////
-    public Oiseau(int x, int y, Color couleur) {
-        super(x, y, couleur);
-    }
+    public Oiseau(int x, int y) {
+    super(x, y, 40);
+    this.vitesseVertical = 0;
+}
+
 
 //////////////////////////////////////
 //           METHODS                //
 //////////////////////////////////////
     @Override
     public void dessiner(Graphics2D dessin) {
-
+        dessin.setColor(couleur);
+        dessin.fillRect(x, y, largeur, largeur);
     }
 
      public void sauter() {
 
     }
 
-    public Oiseau(int x, int y, Color couleur, int vitesseVertical) {
-        super(x, y, couleur);
-        this.vitesseVertical = vitesseVertical;
-    }
 
-//////////////////////////////////////
+    //////////////////////////////////////
 //           GETTER SETTER          //
 //////////////////////////////////////
     public int getVitesseVertical() {

@@ -7,10 +7,11 @@ public class Tuyau extends Rectangle{
 //////////////////////////////////////
 //           CONSTRUCT              //
 //////////////////////////////////////
-    public Tuyau(int x, int y, Color couleur) {
-        super(x, y, couleur);
-    }
 
+
+    public Tuyau(int x, int y, int hauteur) {
+        super(x, y, 100, hauteur);
+    }
 
 //////////////////////////////////////
 //           METHODS                //
