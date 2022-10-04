@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 public class Flappy extends Canvas implements KeyListener {
 
@@ -12,8 +13,9 @@ public class Flappy extends Canvas implements KeyListener {
 
     protected boolean pause = false;
     protected Oiseau oiseau;
-
     protected Tuyau tuyau;
+
+    protected ArrayList<Deplacable> listeDeplacable = new ArrayList<>();
 
     public Flappy() throws InterruptedException {
         JFrame fenetre = new JFrame("Flappy");
@@ -31,7 +33,7 @@ public class Flappy extends Canvas implements KeyListener {
         fenetre.setVisible(true);
         fenetre.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         fenetre.requestFocus();
-        fenetre.addKeyListener(this);
+        fenetre.addKeyListener(Flappy.this);
 
         //On indique que le raffraichissement de l'ecran doit être fait manuellement.
         createBufferStrategy(2);
@@ -42,12 +44,23 @@ public class Flappy extends Canvas implements KeyListener {
     }
 
     public void initialiser() {
-        oiseau = new Oiseau(hauteurEcran);
-        oiseau.setVitesseVertical(-1);
-        pause = false;
-        tuyau = new Tuyau(200,
-                hauteurEcran,
-                largeurEcran);
+
+        //--------Si 1er init---------
+        if (oiseau == null) {
+            oiseau = new Oiseau(hauteurEcran);
+            oiseau.setVitesseVertical(-1);
+            pause = false;
+            tuyau = new Tuyau(200,
+                    hauteurEcran,
+                    largeurEcran);
+
+            listeDeplacable = new ArrayList<>();
+            listeDeplacable.add(oiseau);
+            listeDeplacable.add(tuyau);
+        } else {
+            oiseau.reinitialiser(hauteurEcran);
+        }
+
     }
 
     public void demarrer() throws InterruptedException {
@@ -57,13 +70,17 @@ public class Flappy extends Canvas implements KeyListener {
         initialiser();
 
         while(true) {
+
             indexFrame ++;
             Graphics2D dessin = (Graphics2D) getBufferStrategy().getDrawGraphics();
 
             //-----------------------------
             //reset dessin
             dessin.setColor(Color.WHITE);
-            dessin.fillRect(0,0,largeurEcran,hauteurEcran);
+            dessin.fillRect(0,
+                    0,
+                    largeurEcran,
+                    hauteurEcran);
 
             oiseau.dessiner(dessin);
             tuyau.dessiner(dessin);
@@ -75,7 +92,10 @@ public class Flappy extends Canvas implements KeyListener {
                     pause = true;
                 } else {
                     //------Sinon si le jeu continue---------
-                    oiseau.deplacement();
+                    for (Deplacable deplacable : listeDeplacable) {
+                        deplacable.deplacer();
+                    }
+
                 }
 
             } else {

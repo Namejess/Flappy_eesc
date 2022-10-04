@@ -2,7 +2,7 @@ package edu.jdrouin.eesc;
 
 import java.awt.*;
 
-public class Tuyau extends Rectangle{
+public class Tuyau extends Rectangle implements Deplacable{
 
 //////////////////////////////////////
 //           CONSTRUCT              //
@@ -21,6 +21,12 @@ public class Tuyau extends Rectangle{
         dessin.setColor(couleur);
         dessin.fillRect(x, y, largeur, hauteur);
     }
+    @Override
+    public void deplacer(){
+        x -= 1;
+        }
+
+
 
 //////////////////////////////////////
 //           GETTER SETTER          //
