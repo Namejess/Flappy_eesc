@@ -1,0 +1,28 @@
+package edu.jdrouin.eesc;
+
+import java.awt.*;
+
+public class Tuyau extends Rectangle{
+
+//////////////////////////////////////
+//           CONSTRUCT              //
+//////////////////////////////////////
+    public Tuyau(int x, int y, Color couleur) {
+        super(x, y, couleur);
+    }
+
+
+//////////////////////////////////////
+//           METHODS                //
+//////////////////////////////////////
+    @Override
+    public void dessiner(Graphics2D dessin) {
+
+    }
+
+//////////////////////////////////////
+//           GETTER SETTER          //
+//////////////////////////////////////
+
+
+}
