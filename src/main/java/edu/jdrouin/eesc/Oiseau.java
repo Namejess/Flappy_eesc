@@ -41,7 +41,15 @@ public class Oiseau extends Carre implements Deplacable{
     }
     @Override
     public void deplacer(){
-        y -= vitesseVertical;
+
+        //Correction de la gravité
+        // Si la vitesse est comprise en -0,1 et -0,9 on augmente légèrement la gravité
+        if (vitesseVertical % 10 != 0 && vitesseVertical < 0){
+            y -= vitesseVertical - 0.5f;
+        } else {
+            y -= vitesseVertical;
+        }
+
         vitesseVertical -= 0.05f;
 
         if(y < 0){
@@ -54,7 +62,9 @@ public class Oiseau extends Carre implements Deplacable{
 //    }
 
     public void reinitialiser (int hauteurEcran){
-        y = hauteurEcran / 2 - HAUTEUR_OISEAU / 2;;
+        y = hauteurEcran / 2 - HAUTEUR_OISEAU / 2;
+        vitesseVertical = 0;
+
     }
 
 

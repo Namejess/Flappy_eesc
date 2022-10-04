@@ -16,6 +16,7 @@ public class Flappy extends Canvas implements KeyListener {
     protected Tuyau tuyau;
 
     protected ArrayList<Deplacable> listeDeplacable = new ArrayList<>();
+    protected ArrayList<Sprite> listeSprite = new ArrayList<>();
 
     public Flappy() throws InterruptedException {
         JFrame fenetre = new JFrame("Flappy");
@@ -48,17 +49,23 @@ public class Flappy extends Canvas implements KeyListener {
         //--------Si 1er init---------
         if (oiseau == null) {
             oiseau = new Oiseau(hauteurEcran);
-            oiseau.setVitesseVertical(-1);
+//            oiseau.setVitesseVertical(-1);
             pause = false;
             tuyau = new Tuyau(200,
                     hauteurEcran,
                     largeurEcran);
 
-            listeDeplacable = new ArrayList<>();
             listeDeplacable.add(oiseau);
             listeDeplacable.add(tuyau);
+
+            listeSprite.add(tuyau);
+            listeSprite.add(oiseau);
+
+
         } else {
             oiseau.reinitialiser(hauteurEcran);
+            tuyau.reinitialiser(largeurEcran);
+
         }
 
     }
@@ -82,8 +89,9 @@ public class Flappy extends Canvas implements KeyListener {
                     largeurEcran,
                     hauteurEcran);
 
-            oiseau.dessiner(dessin);
-            tuyau.dessiner(dessin);
+            for (Sprite sprite : listeSprite){
+                sprite.dessiner(dessin);
+            }
 
             if (!pause) {
                 //------Si jamais l'oiseau est tombé par terre--------
