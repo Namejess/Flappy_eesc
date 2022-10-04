@@ -6,6 +6,7 @@ public class Oiseau extends Carre{
 
     protected int vitesseVertical;
 
+
 //////////////////////////////////////
 //           CONSTRUCT              //
 //////////////////////////////////////
