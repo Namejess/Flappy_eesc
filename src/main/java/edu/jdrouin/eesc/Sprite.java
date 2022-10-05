@@ -19,7 +19,7 @@ public abstract class Sprite {
     public Sprite(int x, int y) {
         this.x = x;
         this.y = y;
-        this.couleur = Color.RED;
+        this.couleur = Color.CYAN;
     }
 
 //////////////////////////////////////

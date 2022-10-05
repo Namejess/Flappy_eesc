@@ -4,18 +4,14 @@ import java.awt.*;
 
 public class Tuyau extends Rectangle implements Deplacable{
 
-//////////////////////////////////////
-//           CONSTRUCT              //
-//////////////////////////////////////
+    //-------------CONSTRUCTS---------------
 
     public Tuyau(int hauteur, int hauteurEcran, int largeurEcran) {
         super(largeurEcran - 100, hauteurEcran - hauteur, 100, hauteur);
     }
 
 
-//////////////////////////////////////
-//           METHODS                //
-//////////////////////////////////////
+    //-------------METHODS---------------
     @Override
     public void dessiner(Graphics2D dessin) {
         dessin.setColor(couleur);
@@ -26,16 +22,14 @@ public class Tuyau extends Rectangle implements Deplacable{
         x -= 1;
         }
 
-    public void reinitialiser (int largeurEcran){
-        x = largeurEcran;
 
+    public void reinitialiser (int largeurEcran, int hauteurEcran){
+        x = largeurEcran;
     }
 
 
 
-//////////////////////////////////////
-//           GETTER SETTER          //
-//////////////////////////////////////
+    //-------------GETTER/SETTER---------------
 
 
 }
