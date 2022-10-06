@@ -13,9 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Flappy extends Canvas implements KeyListener {
 
-
-    final BufferedImage imageFondEcran = ImageIO.read(new File("C:\\CDA CCI\\Module Java\\Flappy_eesc\\src\\main\\resources\\PNG\\fondEcran.png"));
-
+    //-------------ATTRIBUTS---------------
     protected static int largeurEcran = 800;
     protected static int hauteurEcran = 600;
 
@@ -33,8 +31,11 @@ public class Flappy extends Canvas implements KeyListener {
     protected ArrayList<Sprite> listeSprite = new ArrayList<>();
     protected ArrayList<Tuyau> listeTuyaux = new ArrayList<>();
 
+    final BufferedImage imageFondEcran = ImageIO.read(new File("src\\main\\resources\\PNG\\fondEcran.png"));
     protected final BufferedImage imageTuyauA = ImageIO.read(new File("src\\main\\resources\\PNG\\marioTube2.png"));
     protected  final BufferedImage imageTuyauB = ImageIO.read(new File("src\\main\\resources\\PNG\\marioTube.png"));
+
+    //-------------CANVA---------------
 
     public Flappy() throws InterruptedException, IOException {
 
@@ -67,6 +68,8 @@ public class Flappy extends Canvas implements KeyListener {
     }
 
 
+    //-------------INIT---------------
+
     public void initialiser() throws IOException {
 
 
@@ -79,7 +82,7 @@ public class Flappy extends Canvas implements KeyListener {
             listeDeplacable.add(oiseau);
             listeSprite.add(oiseau);
 
-        int nombreTuyau = 3;
+        int nombreTuyau = 4;
         int distanceEntreTuyau = (largeurEcran+100) / nombreTuyau;
         //ajout tuyaux
         for(int ordreApparition = 0; ordreApparition < nombreTuyau; ordreApparition ++) {
@@ -111,6 +114,9 @@ public class Flappy extends Canvas implements KeyListener {
         }
     }
 
+    //-------------DEMARRAGE---------------
+
+
     public void demarrer() throws InterruptedException, IOException {
 
         long points = 0;
@@ -119,11 +125,8 @@ public class Flappy extends Canvas implements KeyListener {
 
         while(true) {
 
-
             Graphics2D dessin = (Graphics2D) getBufferStrategy().getDrawGraphics();
             dessin.drawImage(imageFondEcran, 0, 0 , largeurEcran, hauteurEcran, null);
-
-
 
             for(Sprite sprite : listeSprite) {
                 sprite.dessiner(dessin);
@@ -137,7 +140,6 @@ public class Flappy extends Canvas implements KeyListener {
                     //-----si jamais l'oiseau est tombé par terre ---
                     if (oiseau.getY() > hauteurEcran - oiseau.getLargeur()) {
                         perdu = true;
-
 
                     } else {
                         //----sinon si le jeu continu ----
@@ -172,8 +174,6 @@ public class Flappy extends Canvas implements KeyListener {
                 dessin.setColor(Color.YELLOW);
                 dessin.setFont(new Font("Arial", Font.BOLD, 60));
 
-
-
                 int largeurText =  dessin.getFontMetrics().stringWidth("PERDU");
 
                 dessin.drawString(
@@ -190,6 +190,10 @@ public class Flappy extends Canvas implements KeyListener {
             Thread.sleep(1000 / 200);
         }
     }
+
+    //-------------MAIN---------------
+    //--------------------------------
+
 
     public static void main(String[] args) throws InterruptedException, IOException {
         new Flappy();
