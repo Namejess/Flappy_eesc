@@ -1,21 +1,27 @@
 package edu.jdrouin.eesc;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Oiseau extends Carre implements Deplacable{
 
     //-------------ATTRIBUTS---------------
     protected float vitesseVertical;
     protected final static int HAUTEUR_OISEAU = 40;
+    final BufferedImage imageFlappy = ImageIO.read(new File("C:\\CDA CCI\\Module Java\\Flappy_eesc\\src\\main\\resources\\PNG\\flappy.png"));
+
 
 
     //-------------CONSTRUCT---------------
-    public Oiseau(int x, int y) {
+    public Oiseau(int x, int y) throws IOException {
         super(x, y, HAUTEUR_OISEAU);
         this.vitesseVertical = 0;
     }
 
-    public Oiseau(int hauteurEcran) {
+    public Oiseau(int hauteurEcran) throws IOException {
         super(50, 0, HAUTEUR_OISEAU);
         reinitialiser(0, hauteurEcran);
         this.vitesseVertical = 0;
@@ -23,6 +29,7 @@ public class Oiseau extends Carre implements Deplacable{
 
 
     //-------------METHODS---------------
+
 
     public void reinitialiser (int largeurEcran, int hauteurEcran){
         y = hauteurEcran / 2 - HAUTEUR_OISEAU / 2;
@@ -32,8 +39,10 @@ public class Oiseau extends Carre implements Deplacable{
 
     @Override
     public void dessiner(Graphics2D dessin) {
-        dessin.setColor(couleur);
-        dessin.fillRect(x, y, largeur, largeur);
+//        dessin.setColor(couleur);
+//        dessin.fillRect(x, y, largeur, largeur);
+        dessin.drawImage(imageFlappy, x,y, largeur, largeur, null);
+
     }
 
     @Override
@@ -42,10 +51,10 @@ public class Oiseau extends Carre implements Deplacable{
     }
 
     public void sauter() {
-
+        vitesseVertical = 2;
     }
     @Override
-    public void deplacer(){
+    public void deplacer(int largeurEcran, int hauteurEcran){
 
         //Correction de la gravité
         // Si la vitesse est comprise en -0,1 et -0,9 on augmente légèrement la gravité
