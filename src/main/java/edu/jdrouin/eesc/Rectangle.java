@@ -28,15 +28,15 @@ public abstract class Rectangle extends Carre {
 
     @Override
     public int getCentreY() {
-        return hauteur/2;
+        return hauteur / 2;
     }
 
     @Override
     public boolean collision(int x, int y) {
         return x >= this.x
-                && x  < this.x + largeur
+                && x < this.x + largeur
                 && y > this.y
-                && y < this.y + hauteur ;
+                && y < this.y + hauteur;
     }
 
 
@@ -51,5 +51,4 @@ public abstract class Rectangle extends Carre {
         this.hauteur = hauteur;
     }
 
-    public abstract void dessiner2(Graphics2D dessin);
 }

@@ -8,14 +8,18 @@ import java.io.IOException;
 
 public class Tuyau extends Rectangle implements Deplacable{
 
-
-    final BufferedImage imageTuyau = ImageIO.read(new File("C:\\CDA CCI\\Module Java\\Flappy_eesc\\src\\main\\resources\\PNG\\marioTube.png"));
+protected int distanceEntreTuyau;
+    protected BufferedImage imageTuyau;
 
     //-------------CONSTRUCTS---------------
 
-    public Tuyau(int hauteur, int hauteurEcran, int largeurEcran) throws IOException {
-        super(largeurEcran - 100, hauteurEcran - hauteur, 100, hauteur);
+    public Tuyau(int hauteur, int hauteurEcran,  int largeurEcran, int distanceEntreTuyau, BufferedImage imageTuyau) throws IOException {
+        super(largeurEcran, hauteurEcran - hauteur, 100, hauteur);
+        this.distanceEntreTuyau = distanceEntreTuyau;
+        reinitialiser(largeurEcran, hauteurEcran);
+        this.imageTuyau=imageTuyau;
     }
+
 
 
     //-------------METHODS---------------
@@ -29,36 +33,32 @@ public class Tuyau extends Rectangle implements Deplacable{
     }
 
     @Override
-    public void dessiner2(Graphics2D dessin) {
-//        dessin.setColor(couleur);
-//        dessin.fillRect(x, y, largeur, hauteur);
-        dessin.drawImage(imageTuyau, x,y, largeur, hauteur, null);
-
-    }
-
-
-    @Override
     public void deplacer(int largeurEcran, int hauteurEcran) {
         x --;
         if(x < -largeur){
-            reinitialiser(largeurEcran, hauteurEcran);
-            x+= largeurEcran;
-        }
-        if (Math.random() < largeurEcran && Math.random() > hauteurEcran) {
-            y--;
+            x=largeurEcran;
         }
     }
 
+    @Override
+    public void reinitialiser(int largeurEcran, int hauteurEcran) {
 
-    public void reinitialiser (int largeurEcran, int hauteurEcran){
+        x = largeurEcran + distanceEntreTuyau;
+    }
+
+    public void reinitialiser (int largeurEcran, int hauteurEcran, int distanceEntreTuyau){
 //          x = largeurEcran;
 
-        y = (int)(Math.random() * (hauteurEcran / 2));
+
 //        if (Math.random() < largeurEcran && Math.random() > hauteurEcran){
 //            y = hauteurEcran;
 //        } else {
 //        x = (int)(Math.random() * largeurEcran );
 //        }
+    }
+
+    public boolean activer (int largeurEcran){
+            return (x > largeurEcran / 2);
     }
 
 

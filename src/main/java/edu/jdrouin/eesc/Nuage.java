@@ -43,8 +43,4 @@ public class Nuage extends Rectangle implements Deplacable {
         hauteur = (int) (Math.random() * 20 + 20);
     }
 
-    @Override
-    public void dessiner2(Graphics2D dessin) {
-
-    }
 }
